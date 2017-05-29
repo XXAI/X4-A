@@ -27,11 +27,10 @@ class PacienteController extends Controller
              $paciente =  Paciente::where(function($query) use ($parametros) {
                  $query->where('id','LIKE',"%".$parametros['q']."%")->orWhere(DB::raw("nombre"),'LIKE',"%".$parametros['q']."%");
              })
-             ->with("localidad.municipio", "Ingreso.Unidad", "responsable");
+             ->with("localidad.municipio", "Ingresoactivos.Unidad", "responsable");
         } else {
-             $paciente =  Paciente::select('*')->with("localidad.municipio", "Ingreso.Unidad", "responsable");
+             $paciente =  Paciente::select('*')->with("localidad.municipio", "Ingresoactivos.Unidad", "responsable");
         }
-        //$paciente = $paciente-;
 
         if(isset($parametros['page'])){
 
@@ -55,6 +54,8 @@ class PacienteController extends Controller
 
         $mensajes = [
             'required'      => "required",
+            "date_format"   => "date_format",
+            "date"          => "date"
         ];
 
         $reglas = [
@@ -71,6 +72,7 @@ class PacienteController extends Controller
         ];
 
         $inputs = Input::all();
+
 
         DB::beginTransaction();
         try {
