@@ -31,19 +31,22 @@ class PacienteEgresoController extends Controller
 
         $usuarios = UsuarioUnidad::where("clues", $clues)->select("usuario_id")->get();
 
+
+
         $pacientes_ingreso_verificador = Paciente::crossJoin("admision", "admision.paciente_id", "=", "paciente.id")
                                         ->where("admision.estatus_admision", 0)
                                         ->whereIn("admision.usuario_id", $usuarios)
                                         ->select("paciente.id")
                                         ->get();   
+
+
         $arreglo_pacientes = array();                                
         foreach ($pacientes_ingreso_verificador as $key => $value) {
        		$arreglo_pacientes[] = $value->id;
-        }                                               
+        }     
 
         $pacientes_ingreso = Paciente::whereIn("id", $arreglo_pacientes);                                
         
-
          $parametros = Input::only('q','page','per_page');
         if ($parametros['q']) {
              $pacientes_ingreso =  $pacientes_ingreso->where(function($query) use ($parametros) {

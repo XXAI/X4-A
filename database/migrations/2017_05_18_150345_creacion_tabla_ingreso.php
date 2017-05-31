@@ -12,21 +12,32 @@ class CreacionTablaIngreso extends Migration
      */
     public function up()
     {
-        Schema::create('ingreso', function (Blueprint $table) {
+        Schema::create('admision', function (Blueprint $table) {
             $table->string('id', 255);
             $table->integer('incremento');
             $table->string('servidor_id', 4);
 
-            $table->string('pre_ingreso_id');
+            $table->string('paciente_id');
+            $table->integer('referido');
+            $table->string('unidad_referido');
+            $table->integer('urgencia_calificada');
             $table->integer('registro_triage');
             $table->integer('estado_triage_id')->unsigned();
             $table->integer('grado_lesion_id')->unsigned();
-            $table->integer('estatus_ingreso_id')->unsigned();
+            $table->integer('estatus_admision')->unsigned();
+            
+            $table->date('fecha_hora_ingreso');
+            $table->integer('motivo_egreso_id');
+            $table->date('fecha_hora_egreso');
+            $table->integer('contrareferencia');
+
+            $table->string('unidad_contrareferencia');
             $table->string('usuario_id');
+            $table->string('clues');
             
             $table->primary('id');
 
-            $table->foreign('pre_ingreso_id')->references('id')->on('pre_ingreso');
+            $table->foreign('paciente_id')->references('id')->on('paciente');
             $table->foreign('estado_triage_id')->references('id')->on('estado_triage');
             $table->foreign('grado_lesion_id')->references('id')->on('grado_lesion');
             
@@ -42,6 +53,6 @@ class CreacionTablaIngreso extends Migration
      */
     public function down()
     {
-        Schema::drop('ingreso');
+        Schema::drop('admision');
     }
 }

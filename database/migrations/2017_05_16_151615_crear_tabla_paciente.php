@@ -24,8 +24,8 @@ class CrearTablaPaciente extends Migration
 
             $table->string('domicilio');
             $table->string('colonia');
-            $table->string('municipio');
-            $table->string('localidad');
+            $table->integer('municipio_id')->unsigned();
+            $table->integer('localidad_id')->unsigned();
             $table->string('telefono');
             $table->string('no_expediente');
             $table->string('no_afiliacion');

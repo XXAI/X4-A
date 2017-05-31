@@ -17,7 +17,7 @@ class CreacionTablaResponsable extends Migration
             $table->integer('incremento');
             $table->string('servidor_id', 4);
 
-            $table->string('ingreso_id');
+            $table->string('paciente_id');
             $table->string('nombre');
             $table->string('parentesco');
             $table->string('domicilio');
@@ -27,7 +27,7 @@ class CreacionTablaResponsable extends Migration
             
             $table->primary('id');
 
-            $table->foreign('ingreso_id')->references('id')->on('ingreso');
+            $table->foreign('paciente_id')->references('id')->on('paciente');
             
             $table->timestamps();
             $table->softDeletes();

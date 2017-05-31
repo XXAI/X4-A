@@ -18,13 +18,13 @@ class CreacionTablaAreaResponsable extends Migration
             $table->string('servidor_id', 4);
 
             $table->integer('area_responsable_id')->unsigned();
-            $table->string('ingreso_id');
+            $table->string('paciente_id');
             $table->string('usuario_id');
             
             $table->primary('id');
 
             $table->foreign('area_responsable_id')->references('id')->on('catalogo_area_responsable');
-            $table->foreign('ingreso_id')->references('id')->on('ingreso');
+            $table->foreign('paciente_id')->references('id')->on('paciente');
             
             $table->timestamps();
             $table->softDeletes();
